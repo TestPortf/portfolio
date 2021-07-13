@@ -188,6 +188,7 @@ def main():
     usuall_signal_ax.text(0, 0.2, 'Среднеквадратическоая ошибка фильтрации = {}'.format(e_usuall_signal), 
                          fontweight='bold', transform=usuall_signal_ax.transAxes)
     usuall_signal_ax.legend()
+    usuall_signal_window.savefig("График фильтрации обычного сигнала.png")
 
     # Фильтруем сигнал и находим среднеквадратическую ошибку фильтрации
     filtered_gaussian_noise_signal = filter_signal(gaussian_noise_signal)
@@ -204,6 +205,7 @@ def main():
     gaussian_noise_siganl_ax.text(0, 0.2, 'Среднеквадратическоая ошибка фильтрации = {}'.format(e_gaussian_noise_signal), 
                          fontweight='bold', transform=gaussian_noise_siganl_ax.transAxes)
     gaussian_noise_siganl_ax.legend()
+    gaussian_noise_siganl_window.savefig("Результат фильтрации силнала с гауссовским шумом.png")
 
     # Фильтруем сигнал и находим среднеквадратическую ошибку фильтрации
     filtered_harmonic_noise_signal = filter_signal(harmonic_noise_signal)
@@ -220,6 +222,7 @@ def main():
     harmonic_noise_signal_ax.text(0, 0.2, 'Среднеквадратическоая ошибка фильтрации = {}'.format(e_harmonic_noise_signal), 
                          fontweight='bold', transform=harmonic_noise_signal_ax.transAxes)
     harmonic_noise_signal_ax.legend()
+    harmonic_noise_signal_window.savefig("Результат фильтрации сигнала с гармоническим шумом.png")
 
     # АЧХ фильтра бесселя
     plt.figure()
@@ -229,6 +232,7 @@ def main():
     plt.plot(frequency, abs(np.array(generate_filter('LPF', 'Bessel', 8, fn=0, fv=500)))[:len(frequency)], label='Бесселя 8-ого порядка')
     plt.title('Сравнение разных видов ФНЧ фильтров')
     plt.legend()
+    plt.savefig("АЧХ фильтров")
 
     plt.show()
 
