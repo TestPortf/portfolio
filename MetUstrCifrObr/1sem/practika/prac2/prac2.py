@@ -49,11 +49,12 @@ def high_resolution_window_function(step_number):
 
     return high_resolution_window
 
-def signal_plot(input_signal):
+def signal_plot(input_signal, signal_name):
     """
     Строит гарфик сигнала, вычисляет спектры сигнала с заданными оконными функциями
 
     :input_signal: входной сигнал(дискретный)
+    :signal_name: название сигнала, которое будет записано в файл
     """
     import numpy as np
     import cmath as cm
@@ -65,11 +66,11 @@ def signal_plot(input_signal):
     k = np.linspace(0, int(N/2), int(N/2))
     frequency = k/(N * delta_T)
 
-    # Строим график дискритизированного сигнала
+    # Строим график дискретизированного сигнала
     signal_window = plt.figure()
     signal_ax = signal_window.add_subplot(111)
     signal_ax.plot(range(0, len(input_signal)), input_signal)
-    signal_ax.set_title("Дискритизированный сигнал")
+    signal_ax.set_title("Дискретизированный сигнал")
     signal_ax.set_xlabel("Отсчёты")
     signal_ax.set_ylabel("Амплитуда, В")
 
@@ -133,6 +134,11 @@ def signal_plot(input_signal):
     low_res_win_spectrum_window.tight_layout()
     high_res_win_spectrum_window.tight_layout()
 
+    signal_window.savefig(f"График {signal_name} дискретизированного сигнала.png")
+    fft_spectrum_window.savefig(f"Спектры {signal_name} сигнала.png")
+    low_res_win_spectrum_window.savefig(f"Спектры {signal_name} с применением оконной функции низкого разрешения.png")
+    high_res_win_spectrum_window.savefig(f"Спектры {signal_name} с применением оконной функции высокого разрешения.png")
+
 def signal(time):
     """ 
     Генерирует сигнал с заданными параметрами
@@ -157,14 +163,14 @@ def main():
     sd = signal(n * delta_T) 
 
     # Расчитываем амплитудные и фазовые характеристики сигнала с окнами и без, и строим их графики
-    signal_plot(sd)
+    signal_plot(sd, "обычного")
 
     # Генерируем шум с мат. ожиданием 0.03, среднеквадратическим отклонением 0.02 и длиной равной
     # длине дискретного сигнала
-    noise = np.random.normal(0, 0.002, len(sd))
+    noise = np.random.normal(0.03, 0.02, len(sd))
 
     # Повторяем расчёты и построения графика для сигнала с шумом
-    signal_plot(sd + noise)
+    signal_plot(sd + noise, "зашумлённого")
 
     # График шума
     plt.figure()
@@ -172,6 +178,7 @@ def main():
     plt.xlabel("Отсчёты")
     plt.ylabel("Амплитуда, В")
     plt.title("Шум")
+    plt.savefig("График шума")
 
     plt.show()
 
