@@ -1,7 +1,7 @@
 # Const
 delta_T = 1/4000
 N = 65536
-q = 512
+q = 256
 
 def low_resolution_window_function(step_number):
     """
@@ -305,7 +305,7 @@ def main():
     plt.legend()
     
     # Выставляем точку смещения фильтрованного сигнала и длинну выборки, которая будет выводиться
-    shift_point = 260 #130 для q = 256
+    shift_point = 130 #130 для q = 256
     range_const = 200
     plot_range = range(0, range_const)
 
