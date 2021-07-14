@@ -67,7 +67,7 @@ def main():
     delta_T = 5.888*10**(-5)
     M = 16
     U_max = 6
-    file_path = "DSP_LR1_data_files/DSP_Lab_01_File_Var_10_Att_2.dat"
+    file_path = "DSP_Lab_01_File_Var_10_Att_2.dat"
 
     # Находим ряд расчётных значений
     delta_U = (U_max * 2)/(2**M)
@@ -85,8 +85,9 @@ def main():
     global_ax.set_ylabel("Амплитуда, В")
     global_ax.text(0.3, 0.2, "Среднеквадратическое значение шума АЦП: {}".format(round(rms_U, 7)), fontsize=14, 
                    fontweight="bold", transform=global_ax.transAxes) 
+    global_fig.savefig("Общий сигнал.png")
 
-    #0 Разделение сигнала
+    # Разделение сигнала
     start_end_siganl_dots = split_signals(global_y)
 
     # Построение графиков сигналов по отдельности с их параметрами
@@ -104,6 +105,7 @@ def main():
         ax.set_ylabel("Амплитуда, В")
         ax.text(0.3, 0.2, "A = {}\n\u03C4 = {}\nT = {}\n".format(max_amplitude, tau, duration), fontsize=14, 
                 fontweight="bold", transform=ax.transAxes)
+        fig.savefig("Обнаруженная фигура номер {}.png".format(list(start_end_siganl_dots.keys()).index(start)))
 
     plt.show()
 
