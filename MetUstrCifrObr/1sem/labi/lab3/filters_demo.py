@@ -4,7 +4,6 @@ delta_T = 1/44100
 def transfer_function(p, filter_type, filter_kind, filter_order, fn=0, fv=1):
     """
     На основе типа фильтра делает подстановку в передаточную функцию, которую вы написали
-
     :p: оператор передаточной функции
     :filter_type: Тип фильтра('LPF', 'HPF', 'BPF', 'BSF')
     :filter_kind: Вид фильтра('Chebyshev', 'Butterworth', 'Bessel')
@@ -12,7 +11,6 @@ def transfer_function(p, filter_type, filter_kind, filter_order, fn=0, fv=1):
     :fn: Нижняя граница частоты среза фильтра
     :fv: Верхняя граница частоты среза фильтра
     :returns: расчитанную передаточную функцию
-
     """
     import numpy as np
 
@@ -70,7 +68,6 @@ def transfer_function(p, filter_type, filter_kind, filter_order, fn=0, fv=1):
 def generate_filter(filter_type, filter_kind, filter_order, fn=0, fv=1):
     """
     Генерирует фильтр с заданными параметрами
-
     :filter_type: Тип фильтра('LPF', 'HPF', 'BPF', 'BSF')
     :filter_kind: Вид фильтра('Chebyshev', 'Butterworth', 'Bessel')
     :filter_order: Порядок фильтра(от 2 до 8)
@@ -150,4 +147,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

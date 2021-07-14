@@ -131,7 +131,7 @@ def main():
     usuall_signal = data_file_to_array(file_name)
 
     # Вычисляем частоту
-    k = np.linspace(0, N/2, N/2)
+    k = np.linspace(0, int(N/2), int(N/2))
     frequency = k/(N * delta_T)
 
     # Строим график сигнала и его АЧХ
@@ -140,6 +140,7 @@ def main():
     signal_ax.plot(range(len(usuall_signal)), usuall_signal)
     amplitude_spectum_ax = signal_window.add_subplot(212)
     amplitude_spectum_ax.plot(frequency, abs(fp.fft(usuall_signal))[:len(k)])
+    signal_window.savefig("Сигнал и его АЧХ.png")
 
     # Задаём и применяем фильтры
     first_filter = generate_filter('BSF', 'Bessel', 2, fv=43, fn=69)
@@ -153,6 +154,7 @@ def main():
     signal_ax.plot(range(len(filtered_signal)), fp.ifft(filtered_signal))
     amplitude_spectum_ax = filtered_signal_window.add_subplot(212)
     amplitude_spectum_ax.plot(frequency, abs(filtered_signal)[:len(k)])
+    filtered_signal_window.savefig("Фильтрованный сигнал и его АЧХ.png")
 
     plt.show()
 
