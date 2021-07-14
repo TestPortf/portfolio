@@ -114,13 +114,17 @@ def signal_plot(input_signal):
     fft_spectrum_window.tight_layout()
     high_res_win_spectrum_window.tight_layout()
 
+    signal_window.savefig("Входной сигнал.png")
+    fft_spectrum_window.savefig("БПФ спектр сигнала.png")
+    high_res_win_spectrum_window.savefig("Оконная функция высокого разрешения.png")
+
 
 def main():
     import numpy as np
     import matplotlib.pyplot as plt
 
     # Импортируем сигнал
-    file_path = "LR2_dsp/DSP_Lab_02_File_Var_8_28.dat"
+    file_path = "DSP_Lab_02_File_Var_8_28.dat"
     input_signal = data_file_to_array(file_path)
 
     # Дополняем сигнал нулями до степени двойки
