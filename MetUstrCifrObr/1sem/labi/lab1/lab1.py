@@ -83,7 +83,7 @@ def main():
 
     global_ax.set_xlabel("Время, сек")
     global_ax.set_ylabel("Амплитуда, В")
-    global_ax.text(0.3, 0.2, "Среднеквадратическое значение шума АЦП: {}".format(round(rms_U, 7)), fontsize=14, 
+    global_ax.text(0.3, 0.2, "Среднеквадратическое значение шума АЦП: {}".format(round(rms_U, 7)), fontsize=10, 
                    fontweight="bold", transform=global_ax.transAxes) 
     global_fig.savefig("Общий сигнал.png")
 
