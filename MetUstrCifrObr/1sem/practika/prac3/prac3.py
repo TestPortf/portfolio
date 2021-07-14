@@ -112,7 +112,7 @@ def filter_signal(input_signal):
     input_signal = np.array(input_signal)
 
     # Создаём фильтр
-    our_filter = generate_filter('BPF', 'Butterworth', 2, fv=410, fn=390)
+    our_filter = generate_filter('LPF', 'Butterworth', 8, fv=500)
 
     # Применяем его на сигнале
     output_signal = fp.fft(input_signal) * our_filter
@@ -154,10 +154,10 @@ def main():
     A2 = 4
     
     f0 = 171.36
-    f1 = 410.11
-    f2 = 400.33
+    f1 = 478.11
+    f2 = 362.33
 
-    signal_harmonics = {A1:f1, A2:f2}
+    signal_harmonics = {A0:f0, A1:f1, A2:f2}
 
     signal_discritisation = np.linspace(0, N-1, N) * delta_T
 
@@ -176,8 +176,8 @@ def main():
     e_usuall_signal = np.sqrt((1/N) * sum((filtered_usuall_signal - usuall_signal)**2))
 
     # Строим график сигнала
-    range_const = 5000
-    plot_range = range(0, range_const, 1)
+    range_const = 100
+    plot_range = range(1, range_const, 1)
     usuall_signal_window = plt.figure()
     usuall_signal_ax = usuall_signal_window.add_subplot(111)
     usuall_signal_ax.plot(plot_range, usuall_signal[plot_range], label='Нефильтрованный')
