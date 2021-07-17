@@ -236,8 +236,11 @@ def main():
 
     # Строим графики сигналов
     signal_plot(discrete_signal)
+    plt.savefig('График входного сигнала.png')
     signal_plot(bit0)
+    plt.savefig('График сигнала логического 0.png')
     signal_plot(bit1)
+    plt.savefig('График сигнала логической 1.png')
 
     # Генереируем фильтр 
     discrete_analog_filter = generate_filter('LPF', 'Chebyshev', 8, fv=10)
@@ -260,11 +263,13 @@ def main():
     plt.ylabel('Коэффициент подавления')
     plt.xscale('log')
     plt.yscale('log')
+    plt.savefig('АЧХ фильтра.png')
     
     # Фильтруем сигнал и строим его график
     filtered_signal = signal_filtration_with_nonrecursive_filter(discrete_signal, 
                                                                  nonrecursive_filter_with_window_function)
     signal_plot(filtered_signal)
+    plt.savefig('Фильтрованный сигнал.png')
 
     plt.show()
 
