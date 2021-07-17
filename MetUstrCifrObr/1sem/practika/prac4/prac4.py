@@ -267,6 +267,7 @@ def main():
     plt.title('АЧХ дискритизированного фильтра по передаточной функции')
     plt.xlabel('Частота, Гц')
     plt.ylabel('Коэффициент подавления')
+    plt.savefig('АЧХ дискритизированного фильтра по передаточной функции.png')
 
     # Генерируем нерекурсивный фильтр и его АЧХ
     nonrecursive_filter = get_nonrecursive_filter(discrete_analog_filter)
@@ -303,6 +304,7 @@ def main():
     plt.xlabel('Частота, Гц')
     plt.ylabel('Коэффициент подавления')
     plt.legend()
+    plt.savefig('Сравнение нерекурсивных фильтров с применением функции окна и без.png')
     
     # Выставляем точку смещения фильтрованного сигнала и длинну выборки, которая будет выводиться
     shift_point = 130 #130 для q = 256
@@ -313,16 +315,19 @@ def main():
     filtered_usuall_signal = signal_filtration_with_nonrecursive_filter(usuall_signal, 
             nonrecursive_filter_with_window_function)
     compare_signals(usuall_signal, filtered_usuall_signal, plot_range, shift_point)
+    plt.savefig('График фильтрации обычного сигнала.png')
 
     # Фильтруем сигнал и строим графики
     filtered_gaussian_noise_signal = signal_filtration_with_nonrecursive_filter(gaussian_noise_signal, 
             nonrecursive_filter_with_window_function)
     compare_signals(gaussian_noise_signal, filtered_gaussian_noise_signal, plot_range, shift_point)
+    plt.savefig('Результат фильтрации силнала с гауссовским шумом.png')
 
     # Фильтруем сигнал и строим графики
     filtered_harmonic_noise_signal = signal_filtration_with_nonrecursive_filter(harmonic_noise_signal, 
             nonrecursive_filter_with_window_function)
     compare_signals(harmonic_noise_signal, filtered_harmonic_noise_signal, plot_range, shift_point)
+    plt.savefig('Результат фильтрации сигнала с гармоническим шумом.png')
 
     plt.show()
 
