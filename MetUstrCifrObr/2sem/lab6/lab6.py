@@ -139,10 +139,11 @@ def main():
                 / wavelet_scale[column_number])))
 
     # Вейвлет анализ всех сгенерированных нами сигналов
-    for signal in signal_list:
+    for ind, signal in enumerate(signal_list):
         wavelet_transform_to_plot = wavelet_analisis(
             wavelet, signal, wavelet_scale, wavelet_shift)
         wavelet_plot(signal, wavelet_transform_to_plot)
+        plt.savefig(f'Вейвлет анализ {ind}-ого сигнала.png')
 
     plt.show()
 
