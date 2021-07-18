@@ -126,7 +126,7 @@ def main():
 
     # Рисуем график зависимости
     plt.figure()
-    plt.xlabel("Порядки базиса")
+    plt.xlabel("Величина скользящего временного окна")
     plt.ylabel("Величина среднеквадратической ошибки")
     plt.plot(window_range, stdev_array)
     plt.text(plot_start, min(stdev_array), "Наименьшее значение " +
@@ -135,6 +135,7 @@ def main():
     plt.text(plot_start, min(stdev_array) + 0.001, "Порядок наименьшего" +
              "значения среднеквадратической ошибки = " +
              "{}".format(index_of_minimum_stdev), fontsize=12)
+    plt.savefig('График зависимости среднеквадратической ошибки от длинны окна.png')
 
     # Аппроксимируем наилучшей длинной окна, которую мы узнали ранее
     # Снова формируем полином
@@ -150,12 +151,13 @@ def main():
 
     # Рисуем графики сигналов
     plt.figure()
-    plt.title("Сравнение зашумлённого сигнала и фильтрованного аппроксимацией")
+    plt.title("Сравнение зашумлённого сигнала и фильтрованного МНК-фильтром")
     plt.xlabel("Время")
     plt.ylabel("Амплитуда")
     plt.plot(time, gaussian_noise_signal, label="Зашумлённый сигнал")
     plt.plot(time, approximated_signal, label="Аппроксимированный сигнал")
     plt.legend()
+    plt.savefig("Сравнение зашумлённого сигнала и фильтрованного МНК-фильтром.png")
 
     # Выводим график разности сигналов
     plot_signal_difference(signal_delta, signal_stdev)
