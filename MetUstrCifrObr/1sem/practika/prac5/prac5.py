@@ -1,7 +1,7 @@
 # Const
-delta_T = 1/5000
+delta_T = 1/4000
 N = 65536
-q = 1024
+q = 256
 
 
 def recursive_transfer_function(z, filter_type, filter_kind, filter_order, fn=0, fv=1):
@@ -301,11 +301,11 @@ def main():
     A1 = 3
     A2 = 4
     
-    f0 = 71.36
-    f1 = 408.11
-    f2 = 400.33
+    f0 = 171.36
+    f1 = 428.11
+    f2 = 362.33
 
-    signal_harmonics = {A1:f1, A2:f2}
+    signal_harmonics = {A0:f0, A1:f1, A2:f2}
     #signal_harmonics = {A0:250}
     signal_discritisation = np.linspace(0, N-1, N) * delta_T
 
@@ -325,12 +325,12 @@ def main():
         coefficient.append(complex(0, 2 * np.pi * frequency_number * delta_T)) 
 
     # Расчёт теоритического рекурсивного фильтра по передаточной функции 
-    filter_transfer_function = recursive_transfer_function(np.exp(np.array(coefficient)), 'BPF', 'Chebyshev',
-                                                           2, fv=410, fn=390)
+    filter_transfer_function = recursive_transfer_function(np.exp(np.array(coefficient)), 'LPF', 'Butterworth',
+                                                           8, fv=500)
 
     # Генереируем фильтр
-    recursive_filter, A, B = generate_recursive_filter(np.exp(np.array(coefficient)), 'BPF',
-                                                             'Butterworth', 2, fv = 410, fn=390)
+    recursive_filter, A, B = generate_recursive_filter(np.exp(np.array(coefficient)), 'LPF',
+                                                             'Butterworth', 8, fv = 500)
 
     plt.figure()
     plt.plot(usuall_signal)
@@ -339,32 +339,37 @@ def main():
     plt.figure()
     plt.plot(frequency[:int(q/2)], 20 * np.log10(abs(filter_transfer_function))[:int(q/2)], label='теоритически заданный аналоговый прототип')
     plt.plot(frequency[:int(q/2)], 20 * np.log10(abs(recursive_filter))[:int(q/2)], label='рекурсивный фильтр')
-    plt.plot(frequency[:int(q/2)], -60 * np.ones(int(q/2)))
-    plt.title('Сравнение АЧХ фильтрова')
+    plt.title('Сравнение АЧХ фильтров')
     plt.xlabel('Частота, Гц')
     plt.ylabel('Коэффициент подавления')
     plt.xscale('log')
     plt.legend()
+    plt.savefig('Сравнение АЧХ фильтров.png')
 
     # Выставляем точку смещения фильтрованного сигнала и длинну выборки, которая будет выводиться
     shift_point = 0
     range_start = 0
-    range_stop = 5000
+    range_stop = 200
     plot_range = range(range_start, range_stop)
 
     # Фильтруем сигнал без помех и строим графики
     filtered_usuall_signal = signal_filtration_with_recursive_filter(usuall_signal, A, B)
     compare_signals(usuall_signal, filtered_usuall_signal, plot_range, shift_point)
+    plt.savefig('График фильтрации обычного сигнала.png')
 
     # Фильтруем сигнал с гармонической помехой и строим графики
     filtered_harmonic_noise_signal = signal_filtration_with_recursive_filter(harmonic_noise_signal, A, B)
     compare_signals(harmonic_noise_signal, filtered_harmonic_noise_signal, plot_range, shift_point)
+    plt.savefig('Результат фильтрации сигнала с гармоническим шумом.png')
 
     # Фильтруем сигнал с гауссовским шумом и строим графики
     filtered_gaussian_noise_signal = signal_filtration_with_recursive_filter(gaussian_noise_signal, A, B)
     compare_signals(gaussian_noise_signal, filtered_gaussian_noise_signal, plot_range, shift_point)
+    plt.savefig('Результат фильтрации силнала с гауссовским шумом.png')
+
     signal_plot(abs(fft(filtered_gaussian_noise_signal))) 
     plt.xscale('log')
+    plt.savefig('Спектр сигнала после фильтрации.png')
 
     plt.show()
 
