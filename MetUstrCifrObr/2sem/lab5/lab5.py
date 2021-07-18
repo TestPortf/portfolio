@@ -60,6 +60,7 @@ def main():
     plt.title("Полезный сигнал")
     plt.xlabel("Отсчёты")
     plt.ylabel("Амплитуда")
+    plt.savefig("График полезного сигнала.png")
 
     # Set parametrs for main signal and generate him
     main_signal_length = 1500
@@ -172,6 +173,7 @@ def main():
     plt.plot(gaussian_noise_filtered_signal, label="Фильтрованный сигнал",
              linewidth=3)
     plt.legend()
+    plt.savefig("График сравнения зашумлённого Гауссовским шумом и фильтрованного сигналов.png")
 
     gaussian_signal_delta = main_signal - gaussian_noise_filtered_signal
     gaussian_signal_stdev = (stdev(gaussian_signal_delta)
@@ -207,6 +209,7 @@ def main():
     plt.plot(exponentional_noise_filtered_signal, label="Фильтрованный сигнал",
              linewidth=2)
     plt.legend()
+    plt.savefig("График сравнения зашумлённого экспоненциальным шумом и фильтрованного сигналов.png")
 
     exponential_signal_delta = main_signal - exponentional_noise_signal
     exponential_signal_stdev = (stdev(exponential_signal_delta)

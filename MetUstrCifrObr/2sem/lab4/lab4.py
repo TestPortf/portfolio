@@ -131,10 +131,10 @@ def main():
     plt.plot(window_range, stdev_array)
     plt.text(plot_start, min(stdev_array), "Наименьшее значение " +
              "среднеквадратической ошибки = " +
-             "{}".format(round(min(stdev_array), 3)), fontsize=12)
+             "{}".format(round(min(stdev_array), 3)), fontsize=10)
     plt.text(plot_start, min(stdev_array) + 0.001, "Порядок наименьшего" +
              "значения среднеквадратической ошибки = " +
-             "{}".format(index_of_minimum_stdev), fontsize=12)
+             "{}".format(index_of_minimum_stdev), fontsize=10)
     plt.savefig('График зависимости среднеквадратической ошибки от длинны окна.png')
 
     # Аппроксимируем наилучшей длинной окна, которую мы узнали ранее
