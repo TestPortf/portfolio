@@ -55,17 +55,19 @@ def main():
     generated_signal = signal_generate(n, signal_function)
 
     # Генерируем дискритизацию сигнала
-    M = 46
+    M = 40
     sd = np.linspace(0, 2, M)
     points_of_generated_signal = signal_generate(sd, signal_function)
 
     # Интерполяция методом лагранжа
     lagrange_interpolation = lagrange(sd, points_of_generated_signal)
     interpolation_signal_plot(generated_signal, n, points_of_generated_signal, sd, lagrange_interpolation(n), "полиномиальным")
+    plt.savefig(f'Интерполяция методом лагранжа по {M} точек.png')
 
     # Кубическая интерполяция
     cubic_spline_interpolation = CubicSpline(sd, points_of_generated_signal)
     interpolation_signal_plot(generated_signal, n, points_of_generated_signal, sd, cubic_spline_interpolation(n), "кубическая")
+    plt.savefig(f'Кубическая интерполяция по {M} точек.png')
 
     # Определяем величину относительной среднеквадратической ошибки интерполяции
     # Для полиномиальной интерполяции методом лагранжа
