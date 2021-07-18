@@ -101,7 +101,7 @@ def interpolation_signal_plot(high_discretization_signal, high_discretization_nu
 
     plt.figure()
     plt.title("Интерполяция {} шума".format(noise_type))
-    plt.xlabel('Отсчёты')
+    plt.xlabel('Время')
     plt.ylabel('Амплитуда')
     plt.plot(high_discretization_numbers, high_discretization_signal, label="Исходный сигнал")
     plt.plot(low_discretization_numbers, low_discretization_signal, "o", label="Узловые точки исходного сигнала")
@@ -119,6 +119,14 @@ def main():
     signal_function = 'log(2 - cos(2 * pi * 3 * time))'
     generated_signal = signal_generate(time, signal_function)
 
+    # Выводим исходный сигнал
+    plt.figure()
+    plt.plot(time, generated_signal)
+    plt.xlabel('Время')
+    plt.ylabel('Амплитуда')
+    plt.title('Исходный сигнал')
+    plt.savefig('Исходный сигнал.png')
+
     # Генерируем шумы
     gaussian_noise_signal = generated_signal + np.random.normal(0, 1, N)
     tuke_noise_signal = generated_signal + tuke_noise_generate(0.05, 0.25, 4.5, 0)
@@ -133,11 +141,13 @@ def main():
     # Кубическая интерполяция для сигнала с гауссовским шумом
     gaussian_noise_signal_interpolation = CubicSpline(points_time, points_of_gaussian_noise_signal)
     interpolation_signal_plot(gaussian_noise_signal, time, points_of_gaussian_noise_signal, points_time, gaussian_noise_signal_interpolation(time), "Гауссовского")
+    plt.savefig('Кубическая интерполяция для сигнала с Гауссовским шумом.png')
     plot_signal_difference(generated_signal, gaussian_noise_signal_interpolation(time), time)
 
     # Кубическая интерполяция для сигнала с шумом Тюке
     tuke_noise_signal_interpolation = CubicSpline(points_time, points_of_tuke_noise_signal)
     interpolation_signal_plot(tuke_noise_signal, time, points_of_tuke_noise_signal, points_time, tuke_noise_signal_interpolation(time), "Тюке")
+    plt.savefig('Кубическая интерполяция для сигнала с шумом Тюке.png')
     plot_signal_difference(generated_signal, tuke_noise_signal_interpolation(time), time)
 
     plt.show()
