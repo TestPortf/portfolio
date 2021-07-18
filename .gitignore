@@ -3,3 +3,6 @@
 .vimspector.json
 *.swp
 *.doc
+*.docx
+*.odg
+*.jpg

@@ -130,8 +130,9 @@ def main():
     plt.xlabel("Порядки базиса")
     plt.ylabel("Величина среднеквадратической ошибки")
     plt.plot(orders_range, stdev_array)
-    plt.text(plot_start, min(stdev_array), "Наименьшее значение среднеквадратической ошибки = {}".format(round(min(stdev_array), 3)), fontsize=14)
-    plt.text(plot_start, min(stdev_array) + 0.1, "Порядок наименьшего значения среднеквадратической ошибки = {}".format(index_of_minimum_stdev), fontsize=14)
+    plt.text(plot_start, min(stdev_array), "Наименьшее значение среднеквадратической ошибки = {}".format(round(min(stdev_array), 3)), fontsize=10)
+    plt.text(plot_start, min(stdev_array) + 0.1, "Порядок наименьшего значения среднеквадратической ошибки = {}".format(index_of_minimum_stdev), fontsize=10)
+    plt.savefig('График зависимости среднеквадратической ошибки от порядка базиса.png')
 
     # Т. к. матрица не ортогональна, то коэф. параметрической модели сигнала будем искать соответственно
     approximated_signal = approximate_signal_with_basis(index_of_minimum_stdev, gaussian_noise_signal, generated_legendre)
@@ -146,6 +147,7 @@ def main():
     plt.plot(time, gaussian_noise_signal, label="Зашумлённый сигнал")
     plt.plot(time, approximated_signal, label="Аппроксимированный сигнал")
     plt.legend()
+    plt.savefig('Сравнение зашумлённого сигнала и фильтрованного аппроксимацией.png')
 
     # Выводим график разности и находим среднеквадратическую ошибку
     plot_signal_difference(signal_delta, signal_stdev)
