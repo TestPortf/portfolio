@@ -1,4 +1,5 @@
 *.pdf
+!KURSOVAYa.pdf
 *.odt
 .vimspector.json
 *.swp
