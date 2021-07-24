@@ -14,6 +14,7 @@ def wavelet_plot(analisated_signal, wavelet_analisis_result):
     signal_ax = fig.add_subplot(211)
     signal_ax.plot(analisated_signal)
     signal_ax.set_title("Сигнал")
+    signal_ax.tick_params(axis='x', labelbottom=False, bottom=False)
     two_d_wavelet_ax = fig.add_subplot(212)
     two_d_wavelet_ax.pcolormesh(wavelet_analisis_result)
     two_d_wavelet_ax.set_title("Двухмерное отображение вейвлет анализа")
