@@ -1,7 +1,7 @@
 #Main application file name
-MAIN_APP = dipl_for_prot
+MAIN_APP = diplom
 #Main hex file path in windows format
-MAIN_HEX_PATH = /home/tui/Docs/diplom/avr_code/$(MAIN_APP).hex
+MAIN_HEX_PATH = $(MAIN_APP).hex
 
 # Compiler and other Section
 CC = avr-gcc
