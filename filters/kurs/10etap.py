@@ -1,7 +1,7 @@
 # Const
 delta_T = 1/9000
 N = 2000
-q = 2048
+q = 3
 
 
 def recursive_transfer_function(z, fn=0, fv=1):
